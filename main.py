@@ -14,7 +14,7 @@ def read_root():
     return {"Hello": "Welcome to the APC ID Card Generator"}
 
 
-@app.get("/pdfgen")
+@app.post("/pdfgen")
 def create_pdf():
     generatePdf(
          name="Iyanu Gbenga", 
@@ -25,9 +25,11 @@ def create_pdf():
         ward="Ambursa" ,
     )
     return {"msg": "Created a card"}
+    # return FileResponse("idcard.pdf", filename="membership_card")
     
-@app.post("/pdf", responses={200: {"description": "Membership Card"}})
+@app.get("/pdf", )
 def create_pdf(member: Member):
+    # print(member)
     generatePdf(
         name=member.name ,
         email=member.email, 
